@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="/dist/css/bootstrap.css">
+    <script src="/dist/js/bootstrap.js"></script>
+    <script src="/dist/js/jquery.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hiragana Words</title>
+</head>
+<body>
+    <div class="container d-flex flex-column" style="height: 842px; width: 595px;">
+        <div class="row bg-secondary">
+            <div class="col-12">
+                <div class="p-4 display-4">
+                    <span>Hiragana Lesson</span>
+                    <div class="small">ひらがなを学ぶ </div>
+                </div>
+            </div>
+        </div>
+        <div id='hide1' class="row">
+            <div class="col-12">
+                <div  class="p-2 display-5 text-center my-4">Select your Hiras</div>
+            </div>
+        </div>
+        <div id='hide2' class="row">
+            <div class="col-12">
+                <form action="#">
+                    <div class="form-group d-flex align-items-center">
+                        <input type="checkbox" checked name="vowels" style="min-width: 30px;" value="あいうえお">
+                        <pre class="m-0">あ a	い i	う u	え e	お o</pre>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="checkbox" name="2" style="min-width: 30px;" value="かきくけこ">
+                        <pre class="m-0">か ka	き ki	く ku	け ke	こ ko</pre>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="checkbox" name="3" style="min-width: 30px;" value="さしすせそ">
+                        <pre class="m-0">さ sa	し shi	す su	せ se	そ so</pre>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="checkbox" name="4" style="min-width: 30px;" value="たちつてと">
+                        <pre class="m-0">た ta	ち chi	つ tsu	て te	と to</pre>
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <input type="checkbox" name="5" style="min-width: 30px;" value="なにぬねの">
+                        <pre class="m-0">な na	に ni	ぬ nu	ね ne	の no</pre>
+                    </div>
+                    
+                    <div class="form-group d-flex my-4 justify-content-end">
+                        <input id="submit" type="submit" value="Generate Lesson" class="btn btn-success ml-auto">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div id='lessons' class="row flex-grow-1 justify-content-around">
+
+                
+
+
+        </div>
+    </div>
+</body>
+
+<script>
+    url = 'http://hiragana-words.herokuapp.com/sa'
+    //url = 'http://localhost:3000/sa'
+    var myData = {hiragana: ''}
+    $('#submit').on('click', (e)=>{
+        e.preventDefault()
+        $(':checkbox:checked').each((x, item)=>{
+            myData.hiragana += $(item).val()
+        })
+        //url += myData.hiragana
+        console.log(JSON.stringify(myData))
+        
+        $.post({
+            type: "post",
+            url: url,
+            data: myData,
+            success: function(res){
+                $('#hide1').hide()
+                $('#hide2').hide()
+                $(res).each(function(i){
+                    if(i<20)
+                        $('#lessons').append(`
+                        <div class="border rounded-3 px- m-1 d-flex flex-column justify-content-between" style="width: 250px; height: 70px;">
+                            <div class="top w100 d-flex flex-column" style="font-size: 10px;">
+                                <span style="font-size: 16px;">${this.hiragana}</span>
+                                <span>__________________________</span>
+                                <span>${this.meaning.split(";")[0]}</span>
+                                </div>
+                                </div>
+                                `)
+                                
+                })
+            }
+        }); 
+    });
+
+</script>
+</html>

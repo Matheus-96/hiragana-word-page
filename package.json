@@ -1,0 +1,22 @@
+{
+  "name": "hiragana-words-page",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matheus-96/hiragana-words-page.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matheus-96/hiragana-words-page/issues"
+  },
+  "homepage": "https://github.com/Matheus-96/hiragana-words-page#readme",
+  "dependencies": {
+    "bootstrap": "^5.0.2",
+    "jquery": "^3.6.0"
+  }
+}
