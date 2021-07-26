@@ -67,23 +67,43 @@
                         <pre class="m-0">な na	に ni	ぬ nu	ね ne	の no</pre>
                     </div>
                     
-                    <div class="form-group d-flex my-4 justify-content-end">
-                        <input id="submit" type="submit" value="Generate Lesson" class="btn btn-success ml-auto">
-                    </div>
                 </form>
-
+                <div class="form-group d-flex my-4 justify-content-end">
+                    <input id="submit" type="submit" value="Generate Lesson" class="btn btn-success ml-auto">
+                </div>
+                
             </div>
         </div>
         <div id='lessons' class="row flex-grow-1 justify-content-around">
+            
+            
+            
+            
+            
+        </div>
 
-                
-
-
+        <div class="showResults">
+            
         </div>
     </div>
 </body>
 
 <script>
+
+    function showResults(element){
+        let romaji = $(".meaning", $(element).parent()).text()
+        // console.log(romaji)
+        // if($(element).val().length >= romaji.length){
+        //     if($(element).val() == romaji){
+            //         $(element).attr('readonly','readonly')
+            //     } else {
+                //         $(element).val("")
+                //     }
+                // }
+                
+            $(".meaning").fadeIn(200)
+    }
+
     url = 'https://hiragana-words.herokuapp.com/words'
     //url = 'http://localhost:3000/words'
     var myData = {hiragana: ''}
@@ -110,19 +130,27 @@
                                 <div class="word d-flex align-items-center">
                                     <span class="hiragana">${this.hiragana}</span>
                                     <span class="separator">&nbsp;-&nbsp;</span>
-                                    <input type="text" class="myInput">
+                                    <input type="text" class="myInput" onkeyup="keyPressed(this)">
                                 </div>
-                                <div class="meaning">
-                                    <span>${this.meaning}</span>
+                                <div class="">
+                                    <span class="meaning" style="display: none;">${this.meaning}</span>
                                 </div>
                             </div>
                         </div>
                                 `)
+
+
                                 
-                })
-            }
-        }); 
-    });
+                            })
+                            $('.showResults').append(`
+                            <div class="form-group d-flex my-4 justify-content-end">
+                                <input id="submit" type="submit" onclick="showResults()" value="Show Romaji" class="btn btn-success ml-auto">
+                            </div>
+                            `)
+                        }
+                    }); 
+                });
+
 
 </script>
 </html>
