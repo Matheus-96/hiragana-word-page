@@ -7,6 +7,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <style>
+        .myInput {
+            border: 0;
+            width: auto;
+            flex-grow: 1;
+            border-bottom: 1px solid black;
+        }
+
+        .hiragana {
+            font-size: 20px;
+        }
+
+        .meaning {
+            font-style: italic;
+            font-size: 12px;
+        }
+    </style>
+
     <title>Hiragana Words</title>
 </head>
 <body>
@@ -32,19 +51,19 @@
                         <pre class="m-0">あ a	い i	う u	え e	お o</pre>
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <input type="checkbox" name="2" style="min-width: 30px;" value="かきくけこ:ka,ke,ki,ko,ku,">
+                        <input type="checkbox" checked name="2" style="min-width: 30px;" value="かきくけこ:ka,ke,ki,ko,ku,">
                         <pre class="m-0">か ka	き ki	く ku	け ke	こ ko</pre>
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <input type="checkbox" name="3" style="min-width: 30px;" value="さしすせそ:sa,se,shi,so,su,">
+                        <input type="checkbox" checked name="3" style="min-width: 30px;" value="さしすせそ:sa,se,shi,so,su,">
                         <pre class="m-0">さ sa	し shi	す su	せ se	そ so</pre>
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <input type="checkbox" name="4" style="min-width: 30px;" value="たちつてと:ta,chi,tsu,te,to,">
+                        <input type="checkbox" checked name="4" style="min-width: 30px;" value="たちつてと:ta,chi,tsu,te,to,">
                         <pre class="m-0">た ta	ち chi	つ tsu	て te	と to</pre>
                     </div>
                     <div class="form-group d-flex align-items-center">
-                        <input type="checkbox" name="5" style="min-width: 30px;" value="なにぬねの:na,ne,ni,no,nu,">
+                        <input type="checkbox" checked name="5" style="min-width: 30px;" value="なにぬねの:na,ne,ni,no,nu,">
                         <pre class="m-0">な na	に ni	ぬ nu	ね ne	の no</pre>
                     </div>
                     
@@ -86,13 +105,18 @@
                 $(res).each(function(i){
                     if(i<20)
                         $('#lessons').append(`
-                        <div class="border rounded-3 px- m-1 d-flex flex-column justify-content-between" style="width: 250px; height: 70px;">
-                            <div class="top w100 d-flex flex-column" style="font-size: 10px;">
-                                <span style="font-size: 16px;">${this.hiragana}</span>
-                                <span>__________________________</span>
-                                <span>${this.meaning.split(";")[0]}</span>
+                        <div class="border rounded-3 py-1 my-1 mx-3 d-flex flex-column justify-content-between " style="width: 500px;">
+                            <div class="top w100 d-flex flex-column">
+                                <div class="word d-flex align-items-center">
+                                    <span class="hiragana">${this.hiragana}</span>
+                                    <span class="separator">&nbsp;-&nbsp;</span>
+                                    <input type="text" class="myInput">
                                 </div>
+                                <div class="meaning">
+                                    <span>${this.meaning}</span>
                                 </div>
+                            </div>
+                        </div>
                                 `)
                                 
                 })
