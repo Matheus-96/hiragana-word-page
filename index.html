@@ -9,30 +9,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <style>
-        .container {
-            width: 21cm;
-            height: 29.7cm;
+        .tela {
+            width: 22cm;
+            height: 27cm;
+
         }
         .myInput {
             border: 0;
             border-bottom: 1px solid black;
-            flex: 1;
+
         }
 
         .hiragana {
             font-size: 14px;
+
         }
 
         .meaning {
             font-style: italic;
-            font-size: 10px;
+            font-size: 12px;
         }
     </style>
 
     <title>Hiragana Words</title>
 </head>
 <body>
-    <div class="container d-flex flex-column">
+    <div class="tela d-flex flex-column">
         <div class="row bg-secondary">
             <div class="col-12">
                 <div class="p-4 display-4">
@@ -121,25 +123,19 @@
                 
             </div>
         </div>
-        <div class="row">
+        <div class="row justify-content-center align-items-center" id='lessons'>
 
-            <div id='lessons' class="col-6 align-items-center justify-content-around">
+            <!-- <div id='lessons' class="">
                 
                 
                 
                 
                 
-            </div>
-            <div id='lessons1' class="col-6 align-items-center justify-content-around">
-                
-                
-                
-                
-                
-            </div>
+            </div> -->
+
         </div>
             
-            <div class="showResults">
+        <div class="showResults">
                 
         </div>
     </div>
@@ -179,38 +175,35 @@
             success: function(res){
                 $('#hide1').hide()
                 $('#hide2').hide()
+                x = 0;
                 $(res).each(function(i){
-                    if(i<10) {
+                    x++
+                    if(i<20) {
 
                         $('#lessons').append(`
-                        <div class="w-100 border rounded-3 py-1 m-1 text-nowrap" style="height:50px;">
-                                <div class="d-flex align-items-center justify-content-between px-2">
+                        <div class="col-5 border rounded-3 py-1 m-1 text-nowrap" style="">
+                                <div class="d-flex align-items-center justify-content-between px-2 myInput">
                                     <span class="hiragana">${this.hiragana}</span>
                                     <span class="meaning">${this.meaning}</span>
                                     </div>
                                     </div>
                                     `)
-                    } else if(i<20)
-                        $('#lessons1').append(`
-                        <div class="w-100 border rounded-3 py-1 m-1 text-nowrap" style="height:50px;">
-                                <div class="d-flex align-items-center justify-content-between px-2">
-                                    <span class="hiragana">${this.hiragana}</span>
-                                    <span class="meaning">${this.meaning}</span>
-                                    </div>
-                                    </div>
-                                    `)
-                                    
-
-                                
-                            })
-                            $('.showResults').append(`
-                            <div class="form-group d-flex my-4 justify-content-end">
-                                <input id="submit" type="submit" onclick="showResults()" value="Show Romaji" class="btn btn-success ml-auto">
-                            </div>
-                            `)
+                     
                         }
-                    }); 
+                        if(x == 2){
+                            $('#lessons').append(`<div class='w-100'>`) 
+                            x = 0
+                        }
                 });
+            $('.showResults').append(`
+            <div class="form-group d-flex my-4 justify-content-end">
+                <input id="submit" type="submit" onclick="showResults()" value="Show Romaji" class="btn btn-success ml-auto">
+            </div>
+            `)
+
+            } 
+        });
+    });
 
 
 </script>
